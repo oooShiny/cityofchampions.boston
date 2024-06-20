@@ -75,69 +75,71 @@
 </template>
 
 <script>
-    const championships = new Map([
-            [1903, 'redsox'],
-            [1912, 'redsox'],
-            [1915, 'redsox'],
-            [1916, 'redsox'],
-            [1918, 'redsox'],
-            [1929, 'bruins'],
-            [1939, 'bruins'],
-            [1941, 'bruins'],
-            [1957, 'celtics'],
-            [1959, 'celtics'],
-            [1960, 'celtics'],
-            [1961, 'celtics'],
-            [1962, 'celtics'],
-            [1963, 'celtics'],
-            [1964, 'celtics'],
-            [1965, 'celtics'],
-            [1966, 'celtics'],
-            [1968, 'celtics'],
-            [1969, 'celtics'],
-            [1970, 'bruins'],
-            [1972, 'bruins'],
-            [1974, 'celtics'],
-            [1976, 'celtics'],
-            [1981, 'celtics'],
-            [1984, 'celtics'],
-            [1986, 'celtics'],
-            [2001, 'patriots'],
-            [2003, 'patriots'],
-            [2004, 'redsox'],
-            [2004, 'patriots'],
-            [2007, 'redsox'],
-            [2008, 'celtics'],
-            [2011, 'bruins'],
-            [2013, 'redsox'],
-            [2014, 'patriots'],
-            [2016, 'patriots'],
-            [2018, 'redsox'],
-            [2018, 'patriots'],
-            [2024, 'celtics']
-    ]);
+    const championships = [
+            {1903: 'redsox'},
+            {1912: 'redsox'},
+            {1915: 'redsox'},
+            {1916: 'redsox'},
+            {1918: 'redsox'},
+            {1929: 'bruins'},
+            {1939: 'bruins'},
+            {1941: 'bruins'},
+            {1957: 'celtics'},
+            {1959: 'celtics'},
+            {1960: 'celtics'},
+            {1961: 'celtics'},
+            {1962: 'celtics'},
+            {1963: 'celtics'},
+            {1964: 'celtics'},
+            {1965: 'celtics'},
+            {1966: 'celtics'},
+            {1968: 'celtics'},
+            {1969: 'celtics'},
+            {1970: 'bruins'},
+            {1972: 'bruins'},
+            {1974: 'celtics'},
+            {1976: 'celtics'},
+            {1981: 'celtics'},
+            {1984: 'celtics'},
+            {1986: 'celtics'},
+            {2001: 'patriots'},
+            {2003: 'patriots'},
+            {2004: 'redsox'},
+            {2004: 'patriots'},
+            {2007: 'redsox'},
+            {2008: 'celtics'},
+            {2011: 'bruins'},
+            {2013: 'redsox'},
+            {2014: 'patriots'},
+            {2016: 'patriots'},
+            {2018: 'redsox'},
+            {2018: 'patriots'},
+            {2024: 'celtics'}
+    ];
     const containerdiv = document.querySelector("div#banners");
-    championships.forEach(function (team, season){
-        console.log(season, team)
-        let selector = '#' + team;
-        const template = document.querySelector(selector);
-        // Clone the new row and insert it.
-        const clone = template.content.cloneNode(true);
-        let banner_date = clone.querySelectorAll("div.date");
-        banner_date[0].textContent = season;
+    championships.forEach(function(item) {
+        for (const [season, team] of Object.entries(item)) {
+            console.log(season, team)
+            let selector = '#' + team;
+            const template = document.querySelector(selector);
+            // Clone the new row and insert it.
+            const clone = template.content.cloneNode(true);
+            let banner_date = clone.querySelectorAll("div.date");
+            banner_date[0].textContent = season;
 
-        if (team == 'patriots') {
-            let sb_logo = clone.querySelector('img.superbowl');
-            sb_logo.attributes[0].textContent = './super_bowls/'+ season +'.png'
+            if (team == 'patriots') {
+                let sb_logo = clone.querySelector('img.superbowl');
+                sb_logo.attributes[0].textContent = './super_bowls/'+ season +'.png'
+            }
+
+            if (team == 'bruins') {
+                let bruins_logo = clone.querySelector('img.bruins-logo');
+                bruins_logo.attributes[0].textContent = './logos/bruins'+ season +'.png'
+            }
+
+            containerdiv.appendChild(clone);
         }
-
-        if (team == 'bruins') {
-            let bruins_logo = clone.querySelector('img.bruins-logo');
-            bruins_logo.attributes[0].textContent = './logos/bruins'+ season +'.png'
-        }
-
-        containerdiv.appendChild(clone);
-    });
+     });
     
 </script>
 </html>
