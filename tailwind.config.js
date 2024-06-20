@@ -7,6 +7,7 @@ module.exports = {
       'celtics': ['Celtics'],
       'bruins': ['Trebuchet MS', 'sans-serif'],
       'patriots': ['Patriots'],
+      'highway': ['Highway'],
     },
     extend: {},
   },
