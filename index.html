@@ -4,40 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./src/output.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/maxshuty/accessible-web-components@latest/dist/simpleRange.min.js"></script>
     <title>City of Champions</title>
 </head>
 <body class="bg-gray-400">
     <div class="flex justify-evenly">
         <img src="./images/entering-boston.png" alt="Entering Boston sign" class="h-40 p-6">
-        <h1 class="w-fit mx-auto text-6xl text-center p-6 my-5 bg-green-700 font-highway text-white rounded-md border-8 border-white">City of Champions</h1>
-        <img src="./images/trophies.png" alt="Championship trophies" class="h-40 p-6">
+        <h1 class="w-fit mx-auto text-6xl text-center p-6 my-5 bg-green-700 font-highway text-white rounded-lg border-8 border-white">City of Champions</h1>
+        <div class="flex p-6">
+            <img src="./images/trophy-nba.png" alt="NBA Championship trophy" class="h-28 cursor-pointer" onclick="filterBanners('celtics')">
+            <img src="./images/trophy-mlb.png" alt="MLB Championship trophy" class="h-28 cursor-pointer" onclick="filterBanners('redsox')">
+            <img src="./images/trophy-nhl.png" alt="NHL Championship trophy" class="h-28 cursor-pointer" onclick="filterBanners('bruins')">
+            <img src="./images/trophy-nfl.png" alt="NFL Championship trophy" class="h-28 cursor-pointer" onclick="filterBanners('patriots')">
+        </div>
+    </div>
+    <div class="w-1/2 mx-auto">
+        <range-selector min-range="1903" max-range="2024" slider-color="green"></range-selector>   
     </div>
     <div id="banners" class="px-4 flex flex-wrap gap-6 justify-between">
-        
+        <!-- Banners added via JS here. -->
     </div>
     
 </body>
-
+<div class="hidden"></div>
+<!------------ 
+    Templates
+ ------------->
 <!-- Red Sox Banner Template -->
 <template id="redsox">
-    <div class="h-96 w-32 bg-red-700 flex flex-col justify-between text-blue-600 ring-4 ring-red-700">
-        <div class="date font-redsox my-auto mx-auto h-4 font-outline-1 text-7xl rotate-90"></div>
+    <div data-team="redsox" data-year="" class="banner h-48 w-16 bg-red-700 flex flex-col justify-between text-blue-600 ring-4 ring-red-700">
+        <div class="date font-redsox my-auto mx-auto h-4 font-outline-1 text-4xl rotate-90"></div>
         <div class="w-4/5 mx-auto">
-            <img src="./logos/redsox.webp" alt="Red Sox Logo" class="h-20 w-20 mx-auto">
-            <div class="text-xl text-center font-redsox font-outline-0 uppercase leading-tight">World<br>Series<br>Champions</div>
+            <img src="./logos/redsox.webp" alt="Red Sox Logo" class="h-8 w-8 mx-auto">
+            <div class="text-sm text-center font-redsox font-outline-0 uppercase ">World<br>Series<br>Champions</div>
         </div> 
     </div>
 </template>
 
 <!-- Celtics Banner Template -->
 <template id="celtics">
-    <div class="h-96 w-64 p-2
+    <div data-team="celtics" data-year="" class="banner h-48 w-32 p-2
     flex flex-col justify-between 
-    text-green-700 border-[10px] border-green-700 bg-white ring-4 ring-green-700
-    text-center uppercase leading-tight font-bold font-celtics">
-        <div class="text-6xl">Boston Celtics</div>
-        <div class="rounded-full border-y-4 border-green-700 w-fit m-auto">NBA</div>
-        <div class="text-4xl">
+    text-green-700 border-8 border-green-700 bg-white ring-4 ring-green-700
+    text-center uppercase  font-bold font-celtics">
+        <div class="text-3xl">Boston Celtics</div>
+        <div class="text-xs rounded-full border-y-4 border-green-700 w-fit m-auto">NBA</div>
+        <div class="text-l">
             <div class="date"></div>
             <div class="">World</div>
             <div>Champions</div>
@@ -47,13 +59,13 @@
 
 <!-- Bruins Banner Template -->
 <template id="bruins">
-    <div class="h-96 w-64 p-2
+    <div data-team="bruins" data-year="" class="banner h-48 w-32 p-2
     flex flex-col justify-between 
      bg-yellow-400 ring-4 ring-yellow-400
-    text-center uppercase leading-tight font-bold font-bruins">
-        <div class="text-6xl">Boston Bruins</div>
-        <img src="./logos/bruins.png" alt="Bruins Logo" class="bruins-logo h-28 mx-auto">
-        <div class="text-2xl">
+    text-center uppercase  font-bold font-bruins">
+        <div class="text-3xl">Boston Bruins</div>
+        <img src="./logos/bruins.png" alt="Bruins Logo" class="bruins-logo h-12 mx-auto">
+        <div class="leading-tight">
             <div class="">Stanley Cup</div>
             <div>Champions</div>
             <div class="date"></div>
@@ -63,21 +75,22 @@
 
 <!-- Patriots Banner Template -->
 <template id="patriots">
-    <div class="h-96 w-48 p-2
+    <div data-team="patriots" data-year="" class="banner h-48 w-24 p-2
     flex flex-col justify-between 
      bg-blue-950 text-white border-gray-300 border-4 ring-4 ring-blue-950
-    text-center uppercase leading-tight font-bold font-patriots">
-    <img src="./logos/patriots.png" alt="Patriots Logo" class="h-20 mx-auto">    
-    <div class="text-l">New England Patriots</div>
-    <img src="" alt="Super Bowl Logo" class="superbowl h-24 mx-auto my-4">
-        <div class="text-l leading-tight">
+    text-center uppercase font-bold font-patriots">
+    <img src="./logos/patriots.png" alt="Patriots Logo" class="h-6 mx-auto">    
+    <div class="text-xsm">New England Patriots</div>
+    <img src="" alt="Super Bowl Logo" class="superbowl h-10 mx-auto">
+        <div class="text-xxs">
             <div class="">World</div>
             <div>Champions</div>
-            <div class="date text-4xl"></div>
+            <div class="date text-xl"></div>
         </div>
     </div>
 </template>
 
+<!-- Build templates from data.  -->
 <script>
     const championships = [
             {1903: 'redsox'},
@@ -123,7 +136,7 @@
     const containerdiv = document.querySelector("div#banners");
     championships.forEach(function(item) {
         for (const [season, team] of Object.entries(item)) {
-            console.log(season, team)
+            
             let selector = '#' + team;
             const template = document.querySelector(selector);
             // Clone the new row and insert it.
@@ -140,11 +153,46 @@
                 let bruins_logo = clone.querySelector('img.bruins-logo');
                 bruins_logo.attributes[0].textContent = './logos/bruins'+ season +'.png'
             }
-
+            clone.children[0].attributes['data-year'].textContent = season;
+        
             containerdiv.appendChild(clone);
         }
      });
     
+</script>
+
+<!-- Filtering by year. -->
+<script>
+    document.addEventListener('range-changed', (e) => {
+    const data = e.detail;
+    let min = data.minRangeValue;
+    let max = data.maxRangeValue;
+    
+    const banners = document.querySelectorAll("div.banner");
+    banners.forEach(function(b){
+        let banner_year = b.attributes['data-year'].textContent;
+        if (min > banner_year || max < banner_year) {
+            b.classList.add('hidden'); 
+        }
+        else {
+            b.classList.remove('hidden');
+        }
+        
+    });
+    // console.log(banners)
+});
+    function filterBanners(team) {
+        const banners = document.querySelectorAll("div.banner");
+        banners.forEach(function(b){
+            let banner_team = b.attributes['data-team'].textContent;
+            if (banner_team != team) {
+                b.classList.add('hidden'); 
+            }
+            else {
+                b.classList.remove('hidden');
+            }
+        });
+    }
 </script>
 </html>
 

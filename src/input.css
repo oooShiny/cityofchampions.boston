@@ -43,5 +43,13 @@
     .font-outline-4 {
       -webkit-text-stroke: 4px white;
     }
+    .text-xxs {
+        font-size: 0.5rem;
+        line-height: 0.5rem;
+    }
+    .text-xsm {
+        font-size: 0.65rem;
+        line-height: 0.75rem;
+    }
   }
 
